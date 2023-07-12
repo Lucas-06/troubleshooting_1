@@ -1,0 +1,47 @@
+Nairobi 
+
+#Verificar as placas de redes 
+ip a
+
+#Verificar status do serviço de rede
+systemctl status networking.service
+
+#Reiniciar o serviço de rede
+systemctl restart networking.service
+
+#Criar pasta para backup
+mkdir /root/bkp
+
+#Copiar pasta das interfaces para a pasta criada
+cp /etc/network/interfaces /root/bkp
+
+#Entrar nas interfaces de rede
+vim /etc/network/interfaces
+
+# The primary network interface NAT
+auto enp0s17
+iface enp0s17 inet dhcp
+
+# The Second network interface Rede Interna
+auto enp0s8
+iface enp0s8 inet static
+	address 172.31.100.253
+	netmask 255.255.255.0
+
+#Reiniciar as placas de rede	
+systemctl restart networking.service
+		
+#Testar conexão com a internet
+ping 8.8.8.8
+
+#Testar DNS bind9
+systemctl status networking.service
+
+#Reiniciar bind9
+systemctl restart networking.service
+
+
+
+
+		
+		
